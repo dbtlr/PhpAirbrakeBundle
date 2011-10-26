@@ -12,12 +12,12 @@ Add these blocks to the following files
 
 ```
 [PhpAirbrakeBundle]
-    git=http://github.com/nodrew/PhpAirbrakeBundle.git
-    target=/PhpAirbrakeBundle
-   
+    git=http://github.com/AbstractCodification/PhpAirbrakeBundle.git
+    target=/bundles/AbstractCodification/Bundle/PhpAirbrakeBundle
+    
 [php-airbrake]
-    git=http://github.com/nodrew/php-airbrake.git
-    target=/PhpAirbrakeBundle/vendor/php-airbrake
+    git=http://github.com/AbstractCodification/php-airbrake.git
+    target=/bundles/AbstractCodification/Bundle/PhpAirbrakeBundle/vendor/php-airbrake
 ```
 
 *app/autoload.php*
@@ -26,7 +26,7 @@ Add these blocks to the following files
 $loader = new UniversalClassLoader();
 $loader->registerNamespaces(array(
     ...
-    'PhpAirbrakeBundle'      => __DIR__.'/../vendor/',
+    'AbstractCodification'   => __DIR__.'/../vendor/bundles',
     ...
 ));
 ```
@@ -39,7 +39,7 @@ public function registerBundles()
     $bundles = array(
         // System Bundles
         ...
-        new PhpAirbrakeBundle\PhpAirbrakeBundle(),
+        new AbstractCodification\Bundle\PhpAirbrakeBundle\PhpAirbrakeBundle(),
         ...
     );
 }

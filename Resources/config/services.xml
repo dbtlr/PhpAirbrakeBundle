@@ -7,8 +7,8 @@
     <parameters>
         <parameter key="php_airbrake.api_key"></parameter>
         <parameter key="php_airbrake.queue"></parameter>
-        <parameter key="php_airbrake.client.class">PhpAirbrakeBundle\Airbrake\Client</parameter>
-        <parameter key="php_airbrake.exception_listener.class">PhpAirbrakeBundle\EventListener\ExceptionListener</parameter>
+        <parameter key="php_airbrake.client.class">AbstractCodification\Bundle\PhpAirbrakeBundle\Airbrake\Client</parameter>
+        <parameter key="php_airbrake.exception_listener.class">AbstractCodification\Bundle\PhpAirbrakeBundle\EventListener\ExceptionListener</parameter>
     </parameters>
 
     <services>

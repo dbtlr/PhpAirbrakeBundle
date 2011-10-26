@@ -1,5 +1,5 @@
 <?php
-namespace PhpAirbrakeBundle\Airbrake;
+namespace AbstractCodification\Bundle\PhpAirbrakeBundle\Airbrake;
 
 use Airbrake\Client as AirbrakeClient;
 use Airbrake\Configuration as AirbrakeConfiguration;
