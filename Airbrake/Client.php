@@ -1,6 +1,9 @@
 <?php
 namespace PhpAirbrakeBundle\Airbrake;
 
+use Airbrake\Client as AirbrakeClient;
+use Airbrake\Configuration as AirbrakeConfiguration;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -13,17 +16,30 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @copyright	(c) 2011 Drew Butler
  * @license		http://www.opensource.org/licenses/mit-license.php
  */
-class Client
+class Client extends AirbrakeClient
 {
-    protected $container;
-
     /**
-     * Takes the Symfony2 Container object as a parameter.
-     *
+     * @param string $apiKey
      * @param Symfony\Component\DependencyInjection\ContainerInterface $container
+     * @param string|null $queue
      */
-    public function __construct(ContainerInterface $container)
+    public function __construct($apiKey, $envName, ContainerInterface $container, $queue=null)
     {
-        $this->container = $container;
+        $request = $container->get('request');
+        list($controller, $action) = explode('::', $request->attributes->get('_controller'));
+
+        $options = array(
+            'environmentName' => $envName,
+            'queue'           => $queue,
+            'serverData'      => $request->server->all(),
+            'getData'         => $request->query->all(),
+            'postData'        => $request->request->all(),
+            'sessionData'     => $request->getSession()->all(),
+            'component'       => $controller,
+            'action'          => $action,
+            'projectRoot'     => realpath($container->getParameter('kernel.root_dir').'/..'),
+        );
+
+        parent::__construct(new AirbrakeConfiguration($apiKey, $options));
     }
 }
