@@ -72,3 +72,26 @@ Resque Integration
 This client will allow for integration with PHPResque by providing the name of the Resque queue to add your error into. It is advisable that if you want to use PHPResque with Symfony2, that you use the [PHPResqueuBundle](https://github.com/hlegius/PHPResqueBundle) from [hlegius](https://github.com/hlegius), as it makes interfacing the worker processes with Symfony2 a breeze.
 
 Once this is installed and running, simply fill in the *queue* config variable with the name of the queue you would like to use. I suggest just keeping it simple with something like 'airbrake'. Assuming you have a worker process running for this queue, you should be golden.
+
+License
+-------
+
+This bundle is under the MIT license. See the complete license in the bundle:
+
+    Resources/meta/LICENSE
+
+About
+-----
+
+PhpAirbrakeBundle is a [Abstract Codification](https://github.com/AbstractCodification) initiative.
+See also the list of [contributors](https://github.com/AbstractCodification/PhpAirbrakeBundle/contributors).
+
+Reporting an issue or a feature request
+---------------------------------------
+
+Issues and feature requests are tracked in the [Github issue tracker](https://github.com/AbstractCodification/PhpAirbrakeBundle/issues).
+
+When reporting a bug, it may be a good idea to reproduce it in a basic project
+built using the [Symfony Standard Edition](https://github.com/symfony/symfony-standard)
+to allow developers of the bundle to reproduce the issue by simply cloning it
+and following some steps.
