@@ -52,3 +52,17 @@ php_airbrake:
     api_key: [your api key]
     queue: [optional resqueue queue name]
 ```
+
+Calling Airbrake Manually
+=========================
+
+The [Airbrake Client](https://github.com/nodrew/php-airbrake) can be found inside the Service Container and can be used like this:
+
+```php
+<?php
+$client = $container->get('php_airbrake.client');
+
+$client->notifyAboutError('Something really bad happened!');
+$client->notifyAboutException(new Exception('Why did I catch this? It would have been caught on its own!?!'));
+```
+
