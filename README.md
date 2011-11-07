@@ -12,11 +12,11 @@ Add these blocks to the following files
 
 ```
 [PhpAirbrakeBundle]
-    git=http://github.com/NoDrew/PhpAirbrakeBundle.git
+    git=http://github.com/nodrew/PhpAirbrakeBundle.git
     target=/bundles/NoDrew/Bundle/PhpAirbrakeBundle
     
 [php-airbrake]
-    git=http://github.com/NoDrew/php-airbrake.git
+    git=http://github.com/nodrew/php-airbrake.git
     target=/bundles/NoDrew/Bundle/PhpAirbrakeBundle/vendor/php-airbrake
 ```
 
