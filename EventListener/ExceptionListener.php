@@ -1,7 +1,7 @@
 <?php
-namespace AbstractCodification\Bundle\PhpAirbrakeBundle\EventListener;
+namespace NoDrew\Bundle\PhpAirbrakeBundle\EventListener;
 
-use AbstractCodification\Bundle\PhpAirbrakeBundle\Airbrake\Client;
+use NoDrew\Bundle\PhpAirbrakeBundle\Airbrake\Client;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 
 /**
