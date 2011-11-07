@@ -1,6 +1,6 @@
 <?php
 
-namespace AbstractCodification\Bundle\PhpAirbrakeBundle\DependencyInjection;
+namespace NoDrew\Bundle\PhpAirbrakeBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
