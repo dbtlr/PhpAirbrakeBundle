@@ -12,12 +12,12 @@ Add these blocks to the following files
 
 ```
 [PhpAirbrakeBundle]
-    git=http://github.com/AbstractCodification/PhpAirbrakeBundle.git
-    target=/bundles/AbstractCodification/Bundle/PhpAirbrakeBundle
+    git=http://github.com/NoDrew/PhpAirbrakeBundle.git
+    target=/bundles/NoDrew/Bundle/PhpAirbrakeBundle
     
 [php-airbrake]
-    git=http://github.com/AbstractCodification/php-airbrake.git
-    target=/bundles/AbstractCodification/Bundle/PhpAirbrakeBundle/vendor/php-airbrake
+    git=http://github.com/NoDrew/php-airbrake.git
+    target=/bundles/NoDrew/Bundle/PhpAirbrakeBundle/vendor/php-airbrake
 ```
 
 *app/autoload.php*
@@ -26,7 +26,7 @@ Add these blocks to the following files
 $loader = new UniversalClassLoader();
 $loader->registerNamespaces(array(
     ...
-    'AbstractCodification'   => __DIR__.'/../vendor/bundles',
+    'NoDrew'   => __DIR__.'/../vendor/bundles',
     ...
 ));
 ```
@@ -39,7 +39,7 @@ public function registerBundles()
     $bundles = array(
         // System Bundles
         ...
-        new AbstractCodification\Bundle\PhpAirbrakeBundle\PhpAirbrakeBundle(),
+        new NoDrew\Bundle\PhpAirbrakeBundle\PhpAirbrakeBundle(),
         ...
     );
 }
@@ -83,8 +83,7 @@ This bundle is under the MIT license. See the complete license in the bundle:
 About
 -----
 
-PhpAirbrakeBundle is a [Abstract Codification](https://github.com/AbstractCodification) initiative.
-See also the list of [contributors](https://github.com/AbstractCodification/PhpAirbrakeBundle/contributors).
+See also the list of [contributors](https://github.com/NoDrew/PhpAirbrakeBundle/contributors).
 
 Reporting an issue or a feature request
 ---------------------------------------
