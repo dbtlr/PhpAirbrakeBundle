@@ -21,7 +21,7 @@ class PhpAirbrakeExtension extends Extension
         $config = $this->mergeConfigs($configs);
 
         if (empty($config['api_key'])) {
-            throw new \Exception('You must define the \'api_key\' parameter in the \'php_airbrake\' configuration section.');
+            return;
         }
 
         $container->setParameter('php_airbrake.api_key', $config['api_key']);
