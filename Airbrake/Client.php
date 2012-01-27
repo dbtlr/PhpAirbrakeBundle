@@ -1,5 +1,5 @@
 <?php
-namespace NoDrew\Bundle\PhpAirbrakeBundle\Airbrake;
+namespace Nodrew\Bundle\PhpAirbrakeBundle\Airbrake;
 
 use Airbrake\Client as AirbrakeClient;
 use Airbrake\Notice;

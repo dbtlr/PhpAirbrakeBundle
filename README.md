@@ -13,11 +13,11 @@ Add these blocks to the following files
 ```
 [PhpAirbrakeBundle]
     git=http://github.com/nodrew/PhpAirbrakeBundle.git
-    target=/bundles/NoDrew/Bundle/PhpAirbrakeBundle
+    target=/bundles/Nodrew/Bundle/PhpAirbrakeBundle
     
 [php-airbrake]
     git=http://github.com/nodrew/php-airbrake.git
-    target=/bundles/NoDrew/Bundle/PhpAirbrakeBundle/vendor/php-airbrake
+    target=/bundles/Nodrew/Bundle/PhpAirbrakeBundle/vendor/php-airbrake
 ```
 
 *app/autoload.php*
@@ -26,7 +26,7 @@ Add these blocks to the following files
 $loader = new UniversalClassLoader();
 $loader->registerNamespaces(array(
     ...
-    'NoDrew'   => __DIR__.'/../vendor/bundles',
+    'Nodrew'   => __DIR__.'/../vendor/bundles',
     ...
 ));
 ```
@@ -39,7 +39,7 @@ public function registerBundles()
     $bundles = array(
         // System Bundles
         ...
-        new NoDrew\Bundle\PhpAirbrakeBundle\PhpAirbrakeBundle(),
+        new Nodrew\Bundle\PhpAirbrakeBundle\PhpAirbrakeBundle(),
         ...
     );
 }
@@ -83,7 +83,7 @@ This bundle is under the MIT license. See the complete license in the bundle:
 About
 -----
 
-See also the list of [contributors](https://github.com/NoDrew/PhpAirbrakeBundle/contributors).
+See also the list of [contributors](https://github.com/Nodrew/PhpAirbrakeBundle/contributors).
 
 Reporting an issue or a feature request
 ---------------------------------------
