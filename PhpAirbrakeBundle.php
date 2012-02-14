@@ -10,7 +10,7 @@ require_once __DIR__.'/vendor/php-airbrake/src/Airbrake/Client.php';
  * This class assists in the loading of the php-airbrake Client class.
  *
  * @package		Airbrake
- * @author		Drew Butler <drew@abstracting.me>
+ * @author		Drew Butler <hi@nodrew.com>
  * @copyright	(c) 2011 Drew Butler
  * @license		http://www.opensource.org/licenses/mit-license.php
  */

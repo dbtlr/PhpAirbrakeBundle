@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
  * Handles exceptions that occur in the code base.
  *
  * @package		Airbrake
- * @author		Drew Butler <drew@abstracting.me>
+ * @author		Drew Butler <hi@nodrew.com>
  * @copyright	(c) 2011 Drew Butler
  * @license		http://www.opensource.org/licenses/mit-license.php
  */
