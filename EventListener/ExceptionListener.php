@@ -1,8 +1,9 @@
 <?php
 namespace Nodrew\Bundle\PhpAirbrakeBundle\EventListener;
 
-use Nodrew\Bundle\PhpAirbrakeBundle\Airbrake\Client;
-use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+use Nodrew\Bundle\PhpAirbrakeBundle\Airbrake\Client,
+    Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent,
+    Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * The PhpAirbrakeBundle ExceptionListener.
@@ -25,6 +26,12 @@ class ExceptionListener
 
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
-        $this->client->notifyOnException($event->getException());
+        $exception = $event->getException();
+        
+        if ($exception instanceof HttpException) {
+            return;
+        }
+        
+        $this->client->notifyOnException($exception);
     }
 }
