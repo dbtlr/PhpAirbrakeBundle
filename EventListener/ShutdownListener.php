@@ -46,11 +46,10 @@ class ShutdownListener
             return;
         }
 
-        $message = 'It looks like we may have shutdown unexpectedly. Here is the error '
-                 . 'we saw while closing up: %s  File: %s  Line: %i';
+        $message   = '[Shutdown Error]: %s';
+        $message   = sprintf($message, $error['message']);
+        $backtrace = array(array('file' => $error['file'], 'line' => $error['line']));
 
-        $message = sprintf($message, $error['message'], $error['file'], $error['line']);
-
-        $this->client->notifyOnError($message);
+        $this->client->notifyOnError($message, $backtrace);
     }
 }
