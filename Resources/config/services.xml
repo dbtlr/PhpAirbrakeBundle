@@ -9,6 +9,7 @@
         <parameter key="php_airbrake.queue"></parameter>
         <parameter key="php_airbrake.client.class">Nodrew\Bundle\PhpAirbrakeBundle\Airbrake\Client</parameter>
         <parameter key="php_airbrake.exception_listener.class">Nodrew\Bundle\PhpAirbrakeBundle\EventListener\ExceptionListener</parameter>
+        <parameter key="php_airbrake.shutdown_listener.class">Nodrew\Bundle\PhpAirbrakeBundle\EventListener\ShutdownListener</parameter>
     </parameters>
 
     <services>
@@ -21,6 +22,11 @@
 
         <service id="php_airbrake.exception_listener" class="%php_airbrake.exception_listener.class%">
             <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" />
+            <argument type="service" id="php_airbrake.client" />
+        </service>
+
+        <service id="php_airbrake.shutdown_listener" class="%php_airbrake.shutdown_listener.class%">
+            <tag name="kernel.event_listener" event="kernel.controller" method="register" />
             <argument type="service" id="php_airbrake.client" />
         </service>
     </services>
