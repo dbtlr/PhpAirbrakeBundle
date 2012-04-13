@@ -46,6 +46,11 @@ class ShutdownListener
             return;
         }
 
+        $fatal  = array(E_ERROR,E_PARSE,E_CORE_ERROR,E_COMPILE_ERROR,E_USER_ERROR,E_RECOVERABLE_ERROR);
+        if (!in_array($error['type'], $fatal)) {
+            return;
+        }
+
         $message   = '[Shutdown Error]: %s';
         $message   = sprintf($message, $error['message']);
         $backtrace = array(array('file' => $error['file'], 'line' => $error['line']));
