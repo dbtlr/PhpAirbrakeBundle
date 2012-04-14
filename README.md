@@ -14,7 +14,7 @@ Add these blocks to the following files
 [PhpAirbrakeBundle]
     git=http://github.com/nodrew/PhpAirbrakeBundle.git
     target=/bundles/Nodrew/Bundle/PhpAirbrakeBundle
-    
+
 [php-airbrake]
     git=http://github.com/nodrew/php-airbrake.git
     target=/bundles/Nodrew/Bundle/PhpAirbrakeBundle/vendor/php-airbrake
@@ -49,8 +49,16 @@ public function registerBundles()
 
 ```
 php_airbrake:
-    api_key: [your api key]
+    api_key: %airbrake_api_key%
+    api_endpoint: %airbrake_api_endpoint%
     queue: [optional resqueue queue name]
+```
+
+*app/config/parameters.ini*
+
+```
+    airbrake_api_key="[airpbrake api key]"
+    airbrake_api_endpoint="http://api.airbrake.io/notifier_api/v2/notices"
 ```
 
 Calling Airbrake Manually
