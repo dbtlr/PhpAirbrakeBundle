@@ -38,7 +38,10 @@ class Client extends AirbrakeClient
         $action        = 'None';
 
         if ($sa = $request->attributes->get('_controller')) {
-            list($controller, $action) = explode('::', $sa);
+            $controllerArray = explode('::', $sa);
+            if(sizeof($controllerArray) > 1){
+                list($controller, $action) = $controllerArray;
+            }
         }
 
         $options = array(
