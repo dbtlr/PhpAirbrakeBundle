@@ -25,6 +25,7 @@ class PhpAirbrakeExtension extends Extension
         }
 
         $container->setParameter('php_airbrake.api_key', $config['api_key']);
+        $container->setParameter('php_airbrake.api_endpoint', isset($config['api_endpoint']) ? $config['api_endpoint'] : null);
         $container->setParameter('php_airbrake.queue', isset($config['queue']) ? $config['queue'] : null);
     }
 

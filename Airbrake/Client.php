@@ -26,7 +26,7 @@ class Client extends AirbrakeClient
      * @param Symfony\Component\DependencyInjection\ContainerInterface $container
      * @param string|null $queue
      */
-    public function __construct($apiKey, $envName, ContainerInterface $container, $queue=null)
+    public function __construct($apiKey, $envName, ContainerInterface $container, $queue=null, $apiEndPoint=null)
     {
         if (!$apiKey) {
             return;
@@ -38,7 +38,10 @@ class Client extends AirbrakeClient
         $action        = 'None';
 
         if ($sa = $request->attributes->get('_controller')) {
-            list($controller, $action) = explode('::', $sa);
+            $controllerArray = explode('::', $sa);
+            if(sizeof($controllerArray) > 1){
+                list($controller, $action) = $controllerArray;
+            }
         }
 
         $options = array(
@@ -53,7 +56,12 @@ class Client extends AirbrakeClient
             'projectRoot'     => realpath($container->getParameter('kernel.root_dir').'/..'),
         );
 
+        if(!empty($apiEndPoint)){
+            $options['apiEndPoint'] = $apiEndPoint;
+        }
+
         parent::__construct(new AirbrakeConfiguration($apiKey, $options));
+
     }
 
     /**
