@@ -6,6 +6,9 @@ This helps binds the [php-airbrake module](https://github.com/nodrew/php-airbrak
 Installation Instructions
 =========================
 
+Using deps (for Symfony 2.0)
+----------------------------
+
 Add these blocks to the following files
 
 *deps*
@@ -31,6 +34,22 @@ $loader->registerNamespaces(array(
 ));
 ```
 
+Using composer (for Symfony 2.1)
+--------------------------------
+
+The best way to install the library is by using [Composer](http://getcomposer.org). Add the following to `composer.json` in the root of your project:
+
+``` javascript
+{ 
+  "require": {
+    "nodrew/php-airbrake-bundle": "dev-master"
+  }
+}
+```
+
+Including bundle in Kernel
+--------------------------
+
 *app/AppKernel.php*
 
 ```
@@ -44,6 +63,9 @@ public function registerBundles()
     );
 }
 ```
+
+Configuration
+-------------
 
 *app/config/config.yml*
 
