@@ -1,0 +1,22 @@
+{
+    "name": "nodrew/php-airbrake-bundle",
+    "description": "This helps binds the php-airbrake module into a Symfony2 bundle for easy use with the framework.",
+    "type": "symfony-bundle",
+    "keywords": ["logging", "exceptions", "airbrake"],
+    "homepage": "https://github.com/nodrew/PhpAirbrakeBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Drew Butler",
+            "email": "hi@nodrew.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.1",        
+        "nodrew/php-airbrake": "dev-master"
+    },
+    "autoload": {
+        "psr-0": { "Nodrew\\Bundle\\PhpAirbrakeBundle": "" }
+    },
+    "target-dir": "Nodrew/Bundle/PhpAirbrakeBundle"
+}
