@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @package		Airbrake
  * @license		http://www.opensource.org/licenses/mit-license.php
  */
-class Client extends Client
+class ConsoleClient extends Client
 {
     protected $enabled = false;
 
