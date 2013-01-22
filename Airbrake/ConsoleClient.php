@@ -47,6 +47,11 @@ class ConsoleClient extends AirbrakeClient
 
     }
 
+    public function setCommand($name)
+    {
+        $this->configuration->_action = $name;
+    }
+
     /**
      * Notify about the notice.
      *
