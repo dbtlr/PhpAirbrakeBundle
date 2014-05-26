@@ -33,34 +33,58 @@ class Client extends AirbrakeClient
         }
 
         $this->enabled = true;
-        $request       = $container->get('request');
-        $controller    = 'None';
-        $action        = 'None';
 
-        if ($sa = $request->attributes->get('_controller')) {
-            $controllerArray = explode('::', $sa);
-            if(sizeof($controllerArray) > 1){
-                list($controller, $action) = $controllerArray;
+        /**
+         * Not all environments have a request.
+         */
+        if (!$this->container->hasScope('request') || !$this->container->isScopeActive('request')) {
+            $options = array(
+                'environmentName' => $envName,
+                'queue'           => $queue,
+                'serverData'      => "",
+                'getData'         => "",
+                'postData'        => "",
+                'sessionData'     => null,
+                'component'       => 'None',
+                'action'          => 'None',
+                'projectRoot'     => realpath($container->getParameter('kernel.root_dir').'/..'),
+            );
+
+            if(!empty($apiEndPoint)){
+                $options['apiEndPoint'] = $apiEndPoint;
             }
+
+            parent::__construct(new AirbrakeConfiguration($apiKey, $options));
+        } else {
+            $request       = $container->get('request');
+            $controller    = 'None';
+            $action        = 'None';
+
+            if ($sa = $request->attributes->get('_controller')) {
+                $controllerArray = explode('::', $sa);
+                if(sizeof($controllerArray) > 1){
+                    list($controller, $action) = $controllerArray;
+                }
+            }
+
+            $options = array(
+                'environmentName' => $envName,
+                'queue'           => $queue,
+                'serverData'      => $request->server->all(),
+                'getData'         => $request->query->all(),
+                'postData'        => $request->request->all(),
+                'sessionData'     => $request->getSession() ? $request->getSession()->all() : null,
+                'component'       => $controller,
+                'action'          => $action,
+                'projectRoot'     => realpath($container->getParameter('kernel.root_dir').'/..'),
+            );
+
+            if(!empty($apiEndPoint)){
+                $options['apiEndPoint'] = $apiEndPoint;
+            }
+
+            parent::__construct(new AirbrakeConfiguration($apiKey, $options));
         }
-
-        $options = array(
-            'environmentName' => $envName,
-            'queue'           => $queue,
-            'serverData'      => $request->server->all(),
-            'getData'         => $request->query->all(),
-            'postData'        => $request->request->all(),
-            'sessionData'     => $request->getSession() ? $request->getSession()->all() : null,
-            'component'       => $controller,
-            'action'          => $action,
-            'projectRoot'     => realpath($container->getParameter('kernel.root_dir').'/..'),
-        );
-
-        if(!empty($apiEndPoint)){
-            $options['apiEndPoint'] = $apiEndPoint;
-        }
-
-        parent::__construct(new AirbrakeConfiguration($apiKey, $options));
 
     }
 
