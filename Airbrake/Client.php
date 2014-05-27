@@ -33,35 +33,50 @@ class Client extends AirbrakeClient
         }
 
         $this->enabled = true;
-        $request       = $container->get('request');
-        $controller    = 'None';
-        $action        = 'None';
 
-        if ($sa = $request->attributes->get('_controller')) {
-            $controllerArray = explode('::', $sa);
-            if(sizeof($controllerArray) > 1){
-                list($controller, $action) = $controllerArray;
+        $projectRoot    = realpath($container->getParameter('kernel.root_dir').'/..');
+
+        if (!$this->hasValidRequest($container)) {
+            $serverData     = "";
+            $getData        = "";
+            $postData       = "";
+            $sessionData    = null;
+            $action         = 'None';
+            $component      = 'None';
+        } else {
+            $request        = $container->get('request');
+            $controller     = 'None';
+            $action         = 'None';
+
+            if ($sa = $request->attributes->get('_controller')) {
+                $controllerArray = explode('::', $sa);
+                if(sizeof($controllerArray) > 1){
+                    list($controller, $action) = $controllerArray;
+                }
             }
-        }
 
+            $serverData     = $request->server->all();
+            $getData        = $request->query->all();
+            $postData       = $request->request->all();
+            $sessionData    = $request->getSession() ? $request->getSession()->all() : null;
+            $component      = $controller;
+
+        }
         $options = array(
             'environmentName' => $envName,
             'queue'           => $queue,
-            'serverData'      => $request->server->all(),
-            'getData'         => $request->query->all(),
-            'postData'        => $request->request->all(),
-            'sessionData'     => $request->getSession() ? $request->getSession()->all() : null,
-            'component'       => $controller,
+            'serverData'      => $serverData,
+            'getData'         => $getData,
+            'postData'        => $postData,
+            'sessionData'     => $sessionData,
+            'component'       => $component,
             'action'          => $action,
-            'projectRoot'     => realpath($container->getParameter('kernel.root_dir').'/..'),
+            'projectRoot'     => $projectRoot,
         );
-
         if(!empty($apiEndPoint)){
             $options['apiEndPoint'] = $apiEndPoint;
         }
-
         parent::__construct(new AirbrakeConfiguration($apiKey, $options));
-
     }
 
     /**
@@ -77,5 +92,16 @@ class Client extends AirbrakeClient
         if ($this->enabled) {
             parent::notify($notice);
         }
+    }
+
+    /**
+     * Check if we have a valid request available.
+     * In symfony 2 we don't always have a request. For instance when calling through a Command.
+     * @param ContainerInterface $container
+     * @return boolean
+     */
+    private function hasValidRequest(ContainerInterface $container)
+    {
+        return $container->hasScope('request') && $container->isScopeActive('request');
     }
 }
