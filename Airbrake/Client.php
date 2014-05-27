@@ -34,31 +34,19 @@ class Client extends AirbrakeClient
 
         $this->enabled = true;
 
-        /**
-         * Not all environments have a request.
-         */
-        if (!$container->hasScope('request') || !$container->isScopeActive('request')) {
-            $options = array(
-                'environmentName' => $envName,
-                'queue'           => $queue,
-                'serverData'      => "",
-                'getData'         => "",
-                'postData'        => "",
-                'sessionData'     => null,
-                'component'       => 'None',
-                'action'          => 'None',
-                'projectRoot'     => realpath($container->getParameter('kernel.root_dir').'/..'),
-            );
+        $projectRoot    = realpath($container->getParameter('kernel.root_dir').'/..');
 
-            if(!empty($apiEndPoint)){
-                $options['apiEndPoint'] = $apiEndPoint;
-            }
-
-            parent::__construct(new AirbrakeConfiguration($apiKey, $options));
+        if (!$this->hasValidRequest($container)) {
+            $serverData     = "";
+            $getData        = "";
+            $postData       = "";
+            $sessionData    = null;
+            $action         = 'None';
+            $component      = 'None';
         } else {
-            $request       = $container->get('request');
-            $controller    = 'None';
-            $action        = 'None';
+            $request        = $container->get('request');
+            $controller     = 'None';
+            $action         = 'None';
 
             if ($sa = $request->attributes->get('_controller')) {
                 $controllerArray = explode('::', $sa);
@@ -67,25 +55,28 @@ class Client extends AirbrakeClient
                 }
             }
 
-            $options = array(
-                'environmentName' => $envName,
-                'queue'           => $queue,
-                'serverData'      => $request->server->all(),
-                'getData'         => $request->query->all(),
-                'postData'        => $request->request->all(),
-                'sessionData'     => $request->getSession() ? $request->getSession()->all() : null,
-                'component'       => $controller,
-                'action'          => $action,
-                'projectRoot'     => realpath($container->getParameter('kernel.root_dir').'/..'),
-            );
+            $serverData     = $request->server->all();
+            $getData        = $request->query->all();
+            $postData       = $request->request->all();
+            $sessionData    = $request->getSession() ? $request->getSession()->all() : null;
+            $component      = $controller;
 
-            if(!empty($apiEndPoint)){
-                $options['apiEndPoint'] = $apiEndPoint;
-            }
-
-            parent::__construct(new AirbrakeConfiguration($apiKey, $options));
         }
-
+        $options = array(
+            'environmentName' => $envName,
+            'queue'           => $queue,
+            'serverData'      => $serverData,
+            'getData'         => $getData,
+            'postData'        => $postData,
+            'sessionData'     => $sessionData,
+            'component'       => $component,
+            'action'          => $action,
+            'projectRoot'     => $projectRoot,
+        );
+        if(!empty($apiEndPoint)){
+            $options['apiEndPoint'] = $apiEndPoint;
+        }
+        parent::__construct(new AirbrakeConfiguration($apiKey, $options));
     }
 
     /**
@@ -101,5 +92,16 @@ class Client extends AirbrakeClient
         if ($this->enabled) {
             parent::notify($notice);
         }
+    }
+
+    /**
+     * Check if we have a valid request available.
+     * In symfony 2 we don't always have a request. For instance when calling through a Command.
+     * @param ContainerInterface $container
+     * @return boolean
+     */
+    private function hasValidRequest(ContainerInterface $container)
+    {
+        return $container->hasScope('request') && $container->isScopeActive('request');
     }
 }
