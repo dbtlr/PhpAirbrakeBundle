@@ -37,7 +37,7 @@ class Client extends AirbrakeClient
         /**
          * Not all environments have a request.
          */
-        if (!$this->container->hasScope('request') || !$this->container->isScopeActive('request')) {
+        if (!$container->hasScope('request') || !$container->isScopeActive('request')) {
             $options = array(
                 'environmentName' => $envName,
                 'queue'           => $queue,
