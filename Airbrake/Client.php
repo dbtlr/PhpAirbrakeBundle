@@ -25,6 +25,7 @@ class Client extends AirbrakeClient
      * @param string $apiKey
      * @param Symfony\Component\DependencyInjection\ContainerInterface $container
      * @param string|null $queue
+     * @param string|null $apiEndPoint
      */
     public function __construct($apiKey, $envName, ContainerInterface $container, $queue=null, $apiEndPoint=null)
     {
