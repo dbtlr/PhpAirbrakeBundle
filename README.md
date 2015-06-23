@@ -98,7 +98,7 @@ $client->notifyAboutException(new Exception('Why did I catch this? It would have
 Resque Integration
 ==================
 
-This client will allow for integration with PHPResque by providing the name of the Resque queue to add your error into. It is advisable that if you want to use PHPResque with Symfony2, that you use the [PHPResqueuBundle](https://github.com/hlegius/PHPResqueBundle) from [hlegius](https://github.com/hlegius), as it makes interfacing the worker processes with Symfony2 a breeze.
+This client will allow for integration with PHPResque by providing the name of the Resque queue to add your error into. It is advisable that if you want to use PHPResque with Symfony2, that you use the [PHPResqueBundle](https://github.com/hlegius/PHPResqueBundle) from [hlegius](https://github.com/hlegius), as it makes interfacing the worker processes with Symfony2 a breeze.
 
 Once this is installed and running, simply fill in the *queue* config variable with the name of the queue you would like to use. I suggest just keeping it simple with something like 'airbrake'. Assuming you have a worker process running for this queue, you should be golden.
 
