@@ -13,7 +13,7 @@
     ],
     "require": {
         "php": ">=5.3.1",        
-        "nodrew/php-airbrake": "dev-master"
+        "dbtlr/php-airbrake": "^1.1"
     },
     "autoload": {
         "psr-0": { "Nodrew\\Bundle\\PhpAirbrakeBundle": "" }
