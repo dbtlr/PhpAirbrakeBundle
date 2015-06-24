@@ -79,7 +79,7 @@ php_airbrake:
 *app/config/parameters.ini*
 
 ```
-    airbrake_api_key="[airpbrake api key]"
+    airbrake_api_key: "%airpbrake api key%"
 ```
 
 Calling Airbrake Manually
